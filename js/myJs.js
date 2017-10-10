@@ -72,11 +72,11 @@
 	}
 
 	// first aniamte
-	scrollAnimate()
+	scrollAnimate(0);
 
 	// animate function
-	function scrollAnimate(){
-		var ar = animateCofig[index] || 0, yar = animateCofig[yindex] || 0;
+	function scrollAnimate(n){
+		var ar = animateCofig[n] || 0, yar = animateCofig[yindex] || 0;
 
 		for (var i = 0; i < ar.length; i++) {
 			var d = ar[i];
@@ -89,20 +89,20 @@
 			}
 			d.fnEnd && d.fnEnd();
 		}
-		for (var i = 0; i < yar.length && yindex != index; i++) {
+		for (var i = 0; i < yar.length && yindex != n; i++) {
 			var d = yar[i];
 			if(d.tout) clearTimeout(d.tout);
 			d.dom.stop().animate(d.start,d.aTime);
-			d.fnStart && d.fnStart()
+			d.fnStart && d.fnStart();
 		}
 
-		if(yindex != index) yindex = index;
+		if(yindex != n) yindex = n;
 	}
 
 	/*animateConfig end*/
 
 	/*event start*/
-	setAnimateBoxHeight()
+	setAnimateBoxHeight();
 
 	$(wd).resize(setAnimateBoxHeight);
 
@@ -126,7 +126,7 @@
 				},400);
 	});
 
-	navLi.click(slideTo)
+	navLi.click(slideTo);
 
 	slideLi.click(slideTo);
 
@@ -148,7 +148,7 @@
 				if(index < 0){index = slideLi.length-1;}
 			}
 
-			slideTo(e, index)
+			slideTo(e, index);
 		}
 	});
 
@@ -165,7 +165,7 @@
 					width:navLi.eq(index).width()+28+"px"
 				},400);
 
-		scrollAnimate()
+		scrollAnimate(index);
 	}
 	/*event end*/
 
